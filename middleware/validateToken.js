@@ -18,7 +18,11 @@ const validateToken = async(req, res,next)=>{
                 res.status(401)
                 throw new Error("User not authorised")
             }
-        } 
+        }
+        if(!token){
+            res.status(401)
+            throw new Error("User not authorised")
+        }
     } 
     catch (error) {
         next(error)

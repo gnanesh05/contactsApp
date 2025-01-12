@@ -14,7 +14,6 @@ export const GetUsers = async(req,res,next)=>{
 
 export const RegisterUser = async(req,res,next)=>{
     try {
-        console.log(req.body)
         const {username,email, password} = req.body;
         if(!username || !email || !password){
             res.status(400)
@@ -28,7 +27,7 @@ export const RegisterUser = async(req,res,next)=>{
         const hashedPassword = await bcrypt.hash(password,10);
         const newUser = await Users.create({username, email, password:hashedPassword});
         if(newUser){
-            res.status(201).json({_id:newUser.id, email:user.email})
+            res.status(201).json({_id:newUser.id, email:newUser.email})
         }
         else{
             res.status(400)
@@ -57,7 +56,7 @@ export const LoginUser = async(req,res,next)=>{
                     id:existingUser.id
 
                 }
-            },process.env.SECRET_KEY, {expiresIn:"1m"});
+            },process.env.SECRET_KEY, {expiresIn:"30m"});
             res.status(200).json({"accessToken":accessToken});
         }
         else{
@@ -71,5 +70,5 @@ export const LoginUser = async(req,res,next)=>{
 }
 
 export const GetCurrentUser = async(req,res,next)=>{
-    res.status(200).json("current user")
+    res.status(200).json(req.user)
 }
