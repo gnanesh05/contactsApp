@@ -22,12 +22,6 @@ router.use(validateToken)
  *       - Contacts
  *     security:
  *       - bearerAuth: []  # This indicates that a JWT token is required for authentication
- *     parameters:
- *       - in: header
- *         name: authorization
- *         required: true
- *         description: Bearer token for authentication.
- *         Format: Bearer {accessToken}.
  *     responses:
  *       200:
  *         description: Successfully retrieved all contacts.
@@ -74,14 +68,6 @@ router.get("/", getContacts)
  *         description: The unique ID of the contact.
  *         schema:
  *           type: string
- *       - in: header
- *         name: authorization
- *         required: true
- *         description: Bearer token for authentication.
- *         Format: Bearer {accessToken}.
- *         schema:
- *           type: string
- *           example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *     responses:
  *       200:
  *         description: Successfully retrieved contact details.
@@ -118,15 +104,6 @@ router.get("/:id", getContact)
  *       - Contacts
  *     security:
  *       - bearerAuth: []  # This indicates that a JWT token is required for authentication
- *     parameters:
- *       - in: header
- *         name: authorization
- *         required: true
- *         description: Bearer token for authentication.
- *         Format: Bearer {accessToken}.
- *         schema:
- *           type: string
- *           example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *     requestBody:
  *       required: true
  *       content:
@@ -189,14 +166,6 @@ router.post("/", createContact)
  *         description: ID of the contact to be updated
  *         schema:
  *           type: string
- *       - in: header
- *         name: authorization
- *         required: true
- *         description: Bearer token for authentication.
- *         Format: Bearer {accessToken}.
- *         schema:
- *           type: string
- *           example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *     requestBody:
  *       required: true
  *       content:
@@ -261,14 +230,6 @@ router.put("/:id", updateContact)
  *         description: ID of the contact to be deleted
  *         schema:
  *           type: string
- *       - in: header
- *         name: authorization
- *         required: true
- *         description: Bearer token for authentication.
- *         Format: Bearer {accessToken}.
- *         schema:
- *           type: string
- *           example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *     responses:
  *       200:
  *         description: Successfully deleted the contact.

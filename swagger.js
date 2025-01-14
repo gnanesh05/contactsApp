@@ -10,29 +10,25 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT}`, // Change this to your server URL
+        url: `http://localhost:${process.env.PORT}`, // Update server URL
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT", // Indicates JSON Web Tokens
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [], // Apply the scheme globally
       },
     ],
   },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        in: 'header',
-        name: 'Authorization',
-        description: 'Bearer token to access these api endpoints',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
-  },
-  // Apply the security globally to all routes requiring it
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
-  apis: ["./routes/users.js", "./routes/contacts.js"], // Path to your API route files
+  apis: ["./routes/users.js", "./routes/contacts.js"], // Include your routes here
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
