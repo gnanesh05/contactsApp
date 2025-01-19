@@ -1,6 +1,5 @@
-[build]
-  functions = "netlify/functions"
-  external_node_modules = ["express"]
+[functions]
+  xternal_node_modules = ["express", "mongoose"]
   node_bundler = "esbuild"
 
 [[redirects]]
