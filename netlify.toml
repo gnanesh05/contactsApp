@@ -7,7 +7,6 @@
     "serverless-http",
     "swagger-ui-express",
     "swagger-jsdoc"]
-  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/*"
