@@ -5,9 +5,7 @@
      "bcrypt",
     "jsonwebtoken",
     "mongoose",
-    "serverless-http",
-    "swagger-ui-express",
-    "swagger-jsdoc"]
+    "serverless-http"]
 
 [[redirects]]
   from = "/*"
