@@ -1,14 +1,16 @@
 import express from "express";
 import serverless from "serverless-http";
 // import swaggerUI from "swagger-ui-express";
-import contactsRoute from "../routes/contacts.js";
+import contactsRoute from "../routes/contacts.js" 
 import usersRoute from "../routes/users.js";
+import { errorHandler } from "../middleware/errorHandler.js";
 
 // Initialize express app
 const app = express();
 
 // Middleware
 app.use(express.json());
+
 
 //Swagger UI
 // import swaggerJSDoc from "swagger-jsdoc";
@@ -49,6 +51,7 @@ app.use(express.json());
 // Define Routes
 app.use("/api/contacts", contactsRoute);
 app.use("/api/users", usersRoute);
+app.use(errorHandler);
 //app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // Simple Hello World Route
