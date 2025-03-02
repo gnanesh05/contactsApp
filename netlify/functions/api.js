@@ -52,7 +52,7 @@ app.use("/api/users", usersRoute);
 //app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // Simple Hello World Route
-app.get("/hello", (req, res) => res.send("Hello World!"));
+app.get("/api/hello", (req, res) => res.send("Hello World!"));
 
 // Export the handler for Netlify
 export const handler = serverless(app);

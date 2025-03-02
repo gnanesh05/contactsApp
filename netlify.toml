@@ -1,13 +1,16 @@
 [functions]
-  external_node_modules = [ 
-     "express",
+ external_node_modules = ["express",
     "escape-html",
-     "bcrypt",
+    "bcrypt",
     "jsonwebtoken",
     "mongoose",
-    "serverless-http"]
+    "serverless-http",
+    "swagger-ui-express",
+    "swagger-jsdoc"]
+ node_bundler = 'esbuild'
 
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/app"
-  status = 200
+ [[redirects]]
+ force = true
+ from = '/api/*'
+ status = 200
+ to = '/.netlify/functions/api/:splat'
