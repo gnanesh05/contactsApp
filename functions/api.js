@@ -49,8 +49,8 @@ app.use(express.json());
 // const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 // Define Routes
-app.use("/api/contacts", contactsRoute);
-app.use("/api/users", usersRoute);
+// app.use("/api/contacts", contactsRoute);
+// app.use("/api/users", usersRoute);
 app.use(errorHandler);
 //app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
@@ -58,4 +58,5 @@ app.use(errorHandler);
 app.get("/api/hello", (req, res) => res.send("Hello World!"));
 
 // Export the handler for Netlify
-export const handler = serverless(app);
+const handler = serverless(app);
+export default handler;
