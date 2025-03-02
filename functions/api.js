@@ -1,8 +1,8 @@
 import express from "express";
 import serverless from "serverless-http";
 // import swaggerUI from "swagger-ui-express";
-import contactsRoute from "../../routes/contacts.js";
-import usersRoute from "../../routes/users.js";
+import contactsRoute from "../routes/contacts.js";
+import usersRoute from "../routes/users.js";
 
 // Initialize express app
 const app = express();

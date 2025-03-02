@@ -1,13 +1,5 @@
-[functions]
- external_node_modules = ["express",
-    "escape-html",
-    "bcrypt",
-    "jsonwebtoken",
-    "mongoose",
-    "serverless-http",
-    "swagger-ui-express",
-    "swagger-jsdoc"]
- node_bundler = 'esbuild'
+[build]
+ functions = "functions"
 
  [[redirects]]
  force = true
