@@ -2,6 +2,7 @@ import ErrorCode from "../constants.js"
 
 export const errorHandler = (err,req,res,next)=>{
     const status = res.statusCode ? res.statusCode : 500
+    console.log(err.message,err.stack)
     switch(status){
         case ErrorCode.VALIDATION_ERROR:
             return res.status(status).json({title:"Validation Error", message:err.message, stackTrace: err.stack})

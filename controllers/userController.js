@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import {hash, compare} from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import Users from '../models/userModel.js'
 
@@ -24,7 +24,7 @@ export const RegisterUser = async(req,res,next)=>{
             res.status(400)
             throw new Error("User already exists");
         }
-        const hashedPassword = await bcrypt.hash(password,10);
+        const hashedPassword = await hash(password,10);
         const newUser = await Users.create({username, email, password:hashedPassword});
         if(newUser){
             res.status(201).json({_id:newUser.id, email:newUser.email})
@@ -48,7 +48,7 @@ export const LoginUser = async(req,res,next)=>{
             throw new Error("Mandatory fields missing");
         }
         const existingUser = await Users.findOne({email})
-        if(existingUser && (await bcrypt.compare(password , existingUser.password))){
+        if(existingUser && (await compare(password , existingUser.password))){
             const accessToken = jwt.sign({
                 user:{
                     username:existingUser.username,

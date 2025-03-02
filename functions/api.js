@@ -1,62 +1,35 @@
 import express from "express";
 import serverless from "serverless-http";
-// import swaggerUI from "swagger-ui-express";
-import contactsRoute from "../routes/contacts.js" 
 import usersRoute from "../routes/users.js";
+import contactsRoute from "../routes/contacts.js";
 import { errorHandler } from "../middleware/errorHandler.js";
+import connectDb from "../config/dbConnection.js";
 
-// Initialize express app
+// Initialize Express app
 const app = express();
-
-// Middleware
 app.use(express.json());
 
+// Connect to DB only once
+let isDbConnected = false;
+const ensureDbConnection = async () => {
+  if (!isDbConnected) {
+    await connectDb();
+    isDbConnected = true;
+  }
+};
 
-//Swagger UI
-// import swaggerJSDoc from "swagger-jsdoc";
-
-// const swaggerOptions = {
-//   definition: {
-//     openapi: "3.0.0",
-//     info: {
-//       title: "ContactsAPI",
-//       version: "1.0.0",
-//       description: "API documentation for ContactAPP",
-//     },
-//     servers: [
-//       {
-//         url: "http://localhost:8888/", // Replace with your Netlify deployment URL
-//       },
-//     ],
-//     components: {
-//       securitySchemes: {
-//         bearerAuth: {
-//           type: "http",
-//           scheme: "bearer",
-//           bearerFormat: "JWT", // Indicates JSON Web Tokens
-//         },
-//       },
-//     },
-//     security: [
-//       {
-//         bearerAuth: [], // Apply the scheme globally
-//       },
-//     ],
-//   },
-//   apis: ["../../routes/users.js", "../../routes/contacts.js"], // Include your routes here
-// };
-
-// const swaggerSpec = swaggerJSDoc(swaggerOptions);
-
-// Define Routes
-// app.use("/api/contacts", contactsRoute);
-// app.use("/api/users", usersRoute);
+// Register Routes
+app.use(".netlify/functions/api/users", usersRoute);
+app.use(".netlify/functions/api/contacts", contactsRoute);
 app.use(errorHandler);
-//app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // Simple Hello World Route
-app.get("/api/hello", (req, res) => res.send("Hello World!"));
+app.get(".netlify/functions/api/hello", (req, res) => res.send("Hello World!"));
 
-// Export the handler for Netlify
-const handler = serverless(app);
-export default handler;
+// Serverless handler
+const handler = async (event, context) => {
+  await ensureDbConnection(); // Ensure DB connects only once
+  return serverless(app)(event, context);
+};
+
+export { handler };

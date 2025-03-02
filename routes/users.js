@@ -109,5 +109,5 @@ router.post("/login", LoginUser)
  *       500:
  *         description: Server error.
  */
-router.get("/current", validateToken, GetCurrentUser)
+//router.get("/current", validateToken, GetCurrentUser)
 export default router;
