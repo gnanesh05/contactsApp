@@ -3,5 +3,5 @@
   command = "npm install"
 
 [functions]
-  node_bundler = "esbuild"
+  external_node_modules = ["serverless-http", "mongoose","jsonwebtoken","swagger-jsdoc","swagger-ui-express"]
 
