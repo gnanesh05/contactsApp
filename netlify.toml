@@ -1,7 +1,7 @@
 [build]
   functions = "functions"
   command = "npm install"
-  node_version = "18"
+  node_version = "20"
 
 [functions]
   external_node_modules = ["serverless-http", "mongoose","jsonwebtoken","swagger-jsdoc","swagger-ui-express"]
