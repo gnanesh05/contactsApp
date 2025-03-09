@@ -9,7 +9,8 @@ import connectDb from "../config/dbConnection.js";
 const app = express();
 app.use(express.json());
 
-// Connect to DB only once
+console.log("Starting Express app...");
+
 let isDbConnected = false;
 const ensureDbConnection = async () => {
   if (!isDbConnected) {
@@ -18,18 +19,15 @@ const ensureDbConnection = async () => {
   }
 };
 
-// Register Routes
-app.use(".netlify/functions/api/users", usersRoute);
-app.use(".netlify/functions/api/contacts", contactsRoute);
+ensureDbConnection();
+
+app.get("/.netlify/functions/api/hello", (req, res) => {
+  console.log("Hello route was hit");
+  res.json({ message: "Hello World!" });
+});
+app.use("/.netlify/functions/api/users", usersRoute);
+app.use("/.netlify/functions/api/contacts", contactsRoute);
 app.use(errorHandler);
 
-// Simple Hello World Route
-app.get(".netlify/functions/api/hello", (req, res) => res.send("Hello World!"));
 
-// Serverless handler
-const handler = async (event, context) => {
-  await ensureDbConnection(); // Ensure DB connects only once
-  return serverless(app)(event, context);
-};
-
-export { handler };
+export const handler = serverless(app);
