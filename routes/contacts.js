@@ -49,7 +49,7 @@ router.use(validateToken)
  *       500:
  *         description: Server error.
  */
-// router.get("/", getContacts)
+ router.get("/", getContacts)
 
 /**
  * @swagger
