@@ -12,16 +12,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@netlify/functions": "^3.0.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
-    "escape-html": "^1.0.3",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.4",
-    "netlify-cli": "^18.0.0",
-    "serverless-http": "^3.2.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
